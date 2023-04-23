@@ -68,4 +68,4 @@ def dashboard():
     return render_template('dashboard.html', data=formatted_data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=4500, debug=True)
