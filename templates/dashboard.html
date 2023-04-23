@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #222;
+        }
+    </style>
+</head>
+
+<body>
+    {% for device_id, device_data in data.items() %}
+    <h2>Device ID: {{ device_id }}</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Device ID</th>
+            <th>Sensor ID</th>
+            <th>Soil Value</th>
+            <th>Soil %</th>
+            <th>Status Bit</th>
+            <th>Batt Volt</th>
+            <th>Batt %</th>
+            <th>Timestamp</th>
+            <th>Arrived</th>
+            <th>Sys Error</th>
+        </tr>
+        {% for row in device_data %}
+        <tr>
+            {% for item in row %}
+            <td>{{ item }}</
