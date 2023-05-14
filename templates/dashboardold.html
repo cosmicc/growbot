@@ -8,17 +8,12 @@
             background-color: #333;
             color: #fff;
             font-family: Arial, sans-serif;
-	    margin: 0 50px; /* add margins to the left and right */
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
         }
         table {
             border-collapse: collapse;
+            width: auto;
             margin: 0 auto;
             border: 1px solid #ddd;
-            width: 90%;
         }
         th, td {
             text-align: left;
@@ -30,12 +25,12 @@
             background-color: #006600;
             color: #fff;
         }
-        td {
-            background-color: #111;
-        }
+	td {
+	    background-color: #111;
+	}
         tr:nth-child(even) {background-color: #111;}
-        table td {
-            padding: 10px;
+        h1 {
+            text-align: center;
         }
     </style>
 </head>
@@ -45,7 +40,7 @@
         <tr>
             <th><center>DEVICE</th>
             <th><center>SENSOR</th>
-            <th><center>NAME</th>
+	    <th><center>NAME</th>
             <th><center>SOIL</th>
             <th><center>SOIL</th>
             <th><center>STATUS</th>
@@ -54,46 +49,47 @@
             <th><center>TIMESTAMP</th>
             <th><center>ARRIVED</th>
             <th><center>VERSION</th>
-            <th><center>ERROR</th>
+	    <th><center>ERROR</th>
         </tr>
         {% for row in data %}
-        {% if is_past_six_hours(row[9]) %}
-        <tr class="red-row">
-        {% else %}
+	{% if is_past_six_hours(row[9]) %}
+	<tr class="red-row">
+	{% else %}
             <tr>
-        {% endif %}
+	{% endif %}
                 {% for item in row %}
                     {% if loop.index == 2 %}
-                    <td><center>{{ item|upper }}</center></td>
+		    <td><center>{{ item|upper }}</center></td>
                     {% elif loop.index == 3 %}
-                    <td><center>#{{ item|upper }}</center></td>
+		    <td><center>#{{ item|upper }}</center></td>
                     {% elif loop.index == 4 %}
-                    <td><center>{{ item }}</center></td>
-                    {% elif loop.index == 6 %}
-                    <td><center>{{ item|upper }}%</center></td>
-                    {% elif loop.index == 8 %}
-                    <td><center>{{ item|upper }} Volts</center></td>
-                    {% elif loop.index == 9 %}
-                    <td><center>{{ item|upper }}%</center></td>
-                    {% else %}
+		    <td><center>{{ item }}</center></td>
+		    {% elif loop.index == 6 %}
+		    <td><center>{{ item|upper }}%</center></td>
+		    {% elif loop.index == 8 %}
+		    <td><center>{{ item|upper }} Volts</center></td>
+		    {% elif loop.index == 9 %}
+		    <td><center>{{ item|upper }}%</center></td>
+		    {% else %}
                     {% if loop.index in [5,7,10,11,12,13] %}
-                    <td><center>{{ item }}</center></td>
+		    <td><center>{{ item }}</center></td>
                     {% endif %}
                     {% endif %}
                 {% endfor %}
             </tr>
         {% endfor %}
     </table>
-    <table>
-        <tr>
-            <td colspan="13"><div>{{ plot1 | safe }}</div></td>
-        </tr>
-        <tr>
-            <td colspan="13"><div>{{ plot2 | safe }}</div></td>
-        </tr>
+    <table width="1500">
+    <tr>
+    <td><div>{{ plot1 | safe }}</div></td>
+    </tr>
+    <tr>
+    <td><div>{{ plot2 | safe }}</div></td>
+    </tr>
     </table>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
-</html>      
+</html>
+
