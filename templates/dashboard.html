@@ -30,13 +30,20 @@
             background-color: #006600;
             color: #fff;
         }
-        td {
-            background-color: #111;
-        }
-        tr:nth-child(even) {background-color: #111;}
         table td {
             padding: 10px;
         }
+	.red-row {
+    	background-color: red;
+  	}
+	.yellow-row {
+	background-color: yellow;
+	color: #000;
+	}
+	.normal-row {
+	background-color: #111;
+	color: #fff;
+	}
     </style>
 </head>
 <body>
@@ -57,10 +64,14 @@
             <th><center>ERROR</th>
         </tr>
         {% for row in data %}
-        {% if is_past_six_hours(row[9]) %}
+        {% if past_eight_hours(row[9]) %}
         <tr class="red-row">
+	{% elif soil_under_10(row[5]) %}
+	<tr class="red-row">
+	{% elif soil_under_30(row[5]) %}
+	<tr class="yellow-row">
         {% else %}
-            <tr>
+	<tr class="normal-row">
         {% endif %}
                 {% for item in row %}
                     {% if loop.index == 2 %}

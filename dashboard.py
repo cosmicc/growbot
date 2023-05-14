@@ -42,13 +42,25 @@ def get_sensor_name(device_id, sensor_id):
 
 from datetime import datetime, timedelta
 
-def is_past_six_hours(datetime_obj):
+def past_eight_hours(datetime_obj):
     # Get the current datetime
     current_datetime = datetime.now()
     # Calculate the difference between the input datetime and the current datetime
     time_diff = current_datetime - datetime_obj
     # Check if the time difference is more than 6 hours
-    if time_diff > timedelta(hours=6):
+    if time_diff > timedelta(hours=8):
+        return True
+    else:
+        return False
+
+def soil_under_30(soilpct):
+    if (soilpct <= 30):
+        return True
+    else:
+        return False
+
+def soil_under_10(soilpct):
+    if (soilpct <= 10):
         return True
     else:
         return False
@@ -106,9 +118,8 @@ def dashboard():
     plot2_html = fig2.to_html(full_html=False)
 
     # Render the HTML template with the plots
-    return render_template('dashboard.html', data=formatted_data, is_past_six_hours=is_past_six_hours, plot1=plot1_html, plot2=plot2_html)
+    return render_template('dashboard.html', data=formatted_data, soil_under_10=soil_under_10, soil_under_30=soil_under_30, past_eight_hours=past_eight_hours, plot1=plot1_html, plot2=plot2_html)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=DASHBOARD_PORT, debug=DEBUG)
-    conn.close()
 
